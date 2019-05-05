@@ -52,11 +52,29 @@ def send(event=None):  # event is passed by binders.
     """Handles sending of messages."""
     msg = my_msg.get()
     my_msg.set("")  # Clears input field.
-    client_socket.send(bytes(msg, 'UTF-8'))
-#    if msg == ":q":
-#        client_socket.close()
-#        top.quit()
-#        print("You have left the quantum chat")
+    msg.find(msg)
+    if msg.find(":sad") != -1:
+        txt_sad = msg.find(":sad")
+        print(txt_sad)
+        msg = msg.replace(':sad' , ':-(', txt_sad)
+        client_socket.send(bytes(msg, 'UTF-8'))
+    elif msg.find(":smile") != -1:
+        txt_smile = msg.find(":smile")
+        print(txt_smile)
+        msg = msg.replace(':smile' , ':-)', txt_smile) 
+        client_socket.send(bytes(msg, 'UTF-8'))
+    elif msg.find(":angry") != -1:
+        txt_angry = msg.find(":angry")
+        print(txt_angry)
+        msg = msg.replace(':angry' , '>:(', txt_angry) 
+        client_socket.send(bytes(msg, 'UTF-8'))
+    elif msg.find(":confused") != -1:
+        txt_confused = msg.find(":confused")
+        print(txt_confused)
+        msg = msg.replace(':confused' , ':S', txt_confused) 
+        client_socket.send(bytes(msg, 'UTF-8'))
+    else:
+       client_socket.send(bytes(msg, 'UTF-8'))
 
 
 def on_closing(event=None):
